@@ -23,7 +23,6 @@ class Usuario
             return [];
         }
 
-        echo "jajasas";
     }
 
     public function obtenerUsuario($id)
