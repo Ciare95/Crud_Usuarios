@@ -15,9 +15,14 @@ class Usuario
     {
         // Lógica para obtener todos los usuarios
         $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $stmt = $this->conn->prepare("SELECT * from usuarios");
+        $stmt = $this->conn->prepare("SELECT id, primer_nombre from usuarios");
         $stmt->execute();
-        
+
+        foreach ($stmt->fetchAll() as $k=>$v) {
+            # code...
+            echo $v;
+        }
+        echo "papapap";
     }
 
     public function obtenerUsuario($id)
