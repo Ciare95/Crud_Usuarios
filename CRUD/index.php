@@ -6,4 +6,4 @@ $usuario = new Usuario();
 
 // Aquí puedes probar:
 
-// print_r($usuario->listarUsuarios());
+print_r($usuario->listarUsuarios());

@@ -13,11 +13,21 @@ class Usuario
 
     public function listarUsuarios()
     {
-        // Lógica para obtener todos los usuarios
-        $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $stmt = $this->conn->prepare("SELECT * from usuarios");
-        $stmt->execute();
-        
+        try {
+            $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $sql = $this->conn->prepare("SELECT primer_nombre FROM usuarios");
+            $sql->execute();
+            return $sql->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Error al listar usuarios: " . $e->getMessage();
+            return [];
+        }
+
+        foreach ($variable as $key => $value) {
+            # code...
+            echo $key;
+        }
+        echo "jajasas";
     }
 
     public function obtenerUsuario($id)
