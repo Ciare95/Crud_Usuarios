@@ -44,7 +44,13 @@ while (true) {
             $usuario->crearUsuario($pn, $sn, $pa, $sa, $fn, $t, $c, $d);
 
         case '2':
-
+            $variable = $usuario->listarUsuarios();
+            foreach ($variable as $var) {
+                foreach ($var as $key => $value) {
+                    echo $value;
+                    echo PHP_EOL;
+                }
+            }
         case '3':
 
         case '4':

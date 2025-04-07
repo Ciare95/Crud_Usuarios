@@ -23,10 +23,6 @@ class Usuario
             return [];
         }
 
-        foreach ($variable as $key => $value) {
-            # code...
-            echo $key;
-        }
         echo "jajasas";
     }
 
