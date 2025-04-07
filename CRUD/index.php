@@ -31,7 +31,7 @@ while (true) {
             echo PHP_EOL;
             $pa = readline("Ingresa el primer apellido: ");
             echo PHP_EOL;
-            $sa = readline("Ingresa el primer apellido: ");
+            $sa = readline("Ingresa el segundo apellido: ");
             echo PHP_EOL;
             $fn = readline("Ingresa su fecha de nacimiento: ");
             echo PHP_EOL;
@@ -70,7 +70,7 @@ while (true) {
             
         
         default:
-            echo "opcion invalida vuelve a intentarlo";
+            echo "Opcion invalida vuelve a intentarlo";
     }       break;
 }
 
