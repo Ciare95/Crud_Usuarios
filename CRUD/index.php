@@ -42,7 +42,8 @@ while (true) {
             $d = readline("Ingresa la direccion: ");
             echo PHP_EOL;
             $usuario->crearUsuario($pn, $sn, $pa, $sa, $fn, $t, $c, $d);
-
+            echo "Usuario creado";
+            break;
         case '2':
             $variable = $usuario->listarUsuarios();
             foreach ($variable as $var) {
@@ -51,20 +52,25 @@ while (true) {
                     echo PHP_EOL;
                 }
             }
+            break;
         case '3':
+            echo "Actualizar usuario";
+            break;
 
         case '4':
             $id = readline("Ingresa el id del usuario a eliminar: ");
             echo PHP_EOL;
             $usuario->eliminarUsuario($id);
             echo "Usuario eliminado";
+            break;
 
         case '5':
             echo "Gracias por usar el sistema de administracion de usuarios";
             break 2;
+            
         
         default:
             echo "opcion invalida vuelve a intentarlo";
-    }
+    }       break;
 }
 
