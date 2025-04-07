@@ -28,6 +28,29 @@ class Usuario
     public function crearUsuario($primer_nombre, $segundo_nombre, $primer_apellido, $segundo_apellido, $fecha_nacimiento, $telefono, $correo, $direccion)
     {
         // Lógica para insertar usuario
+        try {
+            $sql = "INSERT INTO usuarios(primer_nombre, segundo_nombre,
+                                        primer_apellido, segundo_apellido,
+                                        fecha_nacimiento, telefono, 
+                                        correo, direccion) 
+                                VALUES (:primer_nombre, :segundo_nombre, 
+                                :primer_apellido, :segundo_apellido, 
+                                :fecha_nacimiento, :telefono, 
+                                :correo, :direccion)";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':primer_nombre', $primer_nombre);
+            $stmt->bindParam(':segundo_nombre', $segundo_nombre);
+            $stmt->bindParam(':primer_apellido', $primer_apellido);
+            $stmt->bindParam(':segundo_apellido', $segundo_apellido);
+            $stmt->bindParam(':fecha_nacimiento', $fecha_nacimiento);
+            $stmt->bindParam(':telefono', $telefono);
+            $stmt->bindParam(':correo', $correo);
+            $stmt->bindParam(':direccion', $direccion);
+            $stmt->execute();
+        } catch(PDOException $e) {
+            echo $sql . PHP_EOL . $e->getMessage();
+        }
+        
     }
 
     public function actualizarUsuario()
