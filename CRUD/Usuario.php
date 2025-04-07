@@ -58,14 +58,22 @@ class Usuario
         }
         
     }
-
+    
     public function actualizarUsuario()
     {
         // Lógica para actualizar un usuario
     }
-
+    
     public function eliminarUsuario($id)
     {
         // Lógica para eliminar un usuario
+        try {
+            $sql = "DELETE FROM usuarios WHERE id=:id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
+        } catch (PDOException $e) {
+            echo $sql . "<br>" . $e->getMessage();
+        }
     }
 }
