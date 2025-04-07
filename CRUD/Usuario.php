@@ -21,7 +21,7 @@ class Usuario
         // Lógica para obtener un usuario por ID
     }
 
-    public function crearUsuario()
+    public function crearUsuario($primer_nombre, $segundo_nombre, $primer_apellido, $segundo_apellido, $fecha_nacimiento, $telefono, $correo, $direccion)
     {
         // Lógica para insertar usuario
     }
