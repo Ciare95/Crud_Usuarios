@@ -6,7 +6,6 @@ $usuario = new Usuario();
 
 // Aquí puedes probar:
 
-//print_r($usuario->listarUsuarios());
 
 while (true) {
     echo "Bienvenido a la administracion de usuarios";
@@ -57,3 +56,4 @@ while (true) {
             echo "opcion invalida vuelve a intentarlo";
     }
 }
+
