@@ -14,6 +14,8 @@ class Usuario
     public function listarUsuarios()
     {
         // Lógica para obtener todos los usuarios
+        $suma = 4 + 6;
+        return $suma;
     }
 
     public function obtenerUsuario($id)
