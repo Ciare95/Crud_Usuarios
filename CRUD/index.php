@@ -45,11 +45,14 @@ while (true) {
 
         case '2':
             $variable = $usuario->listarUsuarios();
+            echo "LISTA DE USUARIOS";
+            echo PHP_EOL;
             foreach ($variable as $var) {
                 foreach ($var as $key => $value) {
-                    echo $value;
+                    echo "$key : $value";
                     echo PHP_EOL;
                 }
+                echo PHP_EOL;
             }
         case '3':
 

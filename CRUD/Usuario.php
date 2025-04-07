@@ -15,7 +15,7 @@ class Usuario
     {
         try {
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $sql = $this->conn->prepare("SELECT primer_nombre, segundo_nombre, primer_apellido, segundo_apellido, fecha_nacimiento, telefono, correo, direccion FROM usuarios");
+            $sql = $this->conn->prepare("SELECT primer_nombre as 'Primer Nombre', segundo_nombre as 'Segundo Nombre', primer_apellido as 'Primer Apellido', segundo_apellido as 'Segundo Apellido', fecha_nacimiento as 'Fecha de nacimiento', telefono as Teléfono, correo as 'Correo electrónico', direccion as Dirección FROM usuarios");
             $sql->execute();
             return $sql->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
