@@ -57,9 +57,11 @@ while (true) {
             $id = readline("Ingresa el id del usuario a eliminar: ");
             echo PHP_EOL;
             $usuario->eliminarUsuario($id);
+            echo "Usuario eliminado";
 
         case '5':
-            break;
+            echo "Gracias por usar el sistema de administracion de usuarios";
+            break 2;
         
         default:
             echo "opcion invalida vuelve a intentarlo";

@@ -27,6 +27,16 @@ class Usuario
     public function obtenerUsuario($id)
     {
         // Lógica para obtener un usuario por ID
+        try {
+            $sql = "SELECT * FROM usuarios WHERE id=:id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Error al obtener usuario: " . $e->getMessage();
+            return null;
+        }
     }
 
     public function crearUsuario($primer_nombre, $segundo_nombre, $primer_apellido, $segundo_apellido, $fecha_nacimiento, $telefono, $correo, $direccion)
@@ -65,6 +75,10 @@ class Usuario
     {
         // Lógica para eliminar un usuario
         try {
+            if (obtenerUsuario($id) == null) {
+                echo "El usuario no existe";
+                return;
+            }
             $sql = "DELETE FROM usuarios WHERE id=:id";
             $stmt = $this->conn->prepare($sql);
             $stmt->bindParam(':id', $id);
