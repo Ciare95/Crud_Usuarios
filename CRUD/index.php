@@ -54,6 +54,9 @@ while (true) {
         case '3':
 
         case '4':
+            $id = readline("Ingresa el id del usuario a eliminar: ");
+            echo PHP_EOL;
+            $usuario->eliminarUsuario($id);
 
         case '5':
             break;
