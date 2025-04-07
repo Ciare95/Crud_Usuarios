@@ -22,8 +22,6 @@ class Usuario
             echo "Error al listar usuarios: " . $e->getMessage();
             return [];
         }
-
-        echo "jajasas";
     }
 
     public function obtenerUsuario($id)
@@ -40,9 +38,9 @@ class Usuario
                                         fecha_nacimiento, telefono, 
                                         correo, direccion) 
                                 VALUES (:primer_nombre, :segundo_nombre, 
-                                :primer_apellido, :segundo_apellido, 
-                                :fecha_nacimiento, :telefono, 
-                                :correo, :direccion)";
+                                        :primer_apellido, :segundo_apellido, 
+                                        :fecha_nacimiento, :telefono, 
+                                        :correo, :direccion)";
             $stmt = $this->conn->prepare($sql);
             $stmt->bindParam(':primer_nombre', $primer_nombre);
             $stmt->bindParam(':segundo_nombre', $segundo_nombre);
@@ -53,17 +51,16 @@ class Usuario
             $stmt->bindParam(':correo', $correo);
             $stmt->bindParam(':direccion', $direccion);
             $stmt->execute();
-        } catch(PDOException $e) {
+        } catch (PDOException $e) {
             echo $sql . PHP_EOL . $e->getMessage();
         }
-        
     }
-    
+
     public function actualizarUsuario()
     {
         // Lógica para actualizar un usuario
     }
-    
+
     public function eliminarUsuario($id)
     {
         // Lógica para eliminar un usuario
