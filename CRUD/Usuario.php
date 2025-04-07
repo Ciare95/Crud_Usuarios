@@ -14,8 +14,10 @@ class Usuario
     public function listarUsuarios()
     {
         // Lógica para obtener todos los usuarios
-        $suma = 4 + 6;
-        return $suma;
+        $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $stmt = $this->conn->prepare("SELECT * from usuarios");
+        $stmt->execute();
+        
     }
 
     public function obtenerUsuario($id)
