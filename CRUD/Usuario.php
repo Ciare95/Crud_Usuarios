@@ -108,7 +108,7 @@ class Usuario
         // Lógica para eliminar un usuario
         try {
             if ($this->obtenerUsuario($id) == null) {
-                echo "El usuario no existe";
+                echo " El usuario no existe ";
                 return;
             }
             $sql = "DELETE FROM usuarios WHERE id=:id";

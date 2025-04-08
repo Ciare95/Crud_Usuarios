@@ -115,9 +115,11 @@ while (true) {
             $id = readline("Ingresa el id del usuario a eliminar: ");
             echo PHP_EOL;
             if ($usuario->eliminarUsuario($id)) {
-                echo "Usuario eliminado";
+                echo " Usuario eliminado ";   
+                echo PHP_EOL;            
             } else {
-                echo "Error al eliminar el usuario";
+                echo " Error al eliminar el usuario ";
+                echo PHP_EOL;
             }
             break;
 
