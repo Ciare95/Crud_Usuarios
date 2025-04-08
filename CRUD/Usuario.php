@@ -120,23 +120,20 @@ class Usuario
         }
     }
 
-    public function validacion_fecha($fecha){
+    public function validacion_fecha($a, $m, $d){
         try {
-            if (preg_match('/^\d{4}-\d{2}-\d{2}$/', $fecha)) {
-         
-                $partes = explode('-', $fecha);
-                $anio = (int)$partes[0];
-                $mes = (int)$partes[1];
-                $dia = (int)$partes[2];
-               
-                if (checkdate($mes, $dia, $anio)) {
-                    return true;
-                } else {
+            if ($a >= 1900 and $a <= 2026) {
+                if ($m >= 1 and $m <= 12){
+                    if($d >= 1 and $d <= 31){
+                        return true;
+                    } else {
+                        return false;
+                    }
+                } else{
                     return false;
                 }
-            } else {
-                echo "Formato de fecha incorrecto. Usa YYYY-MM-DD.";
-                echo PHP_EOL;
+            }else{
+                return false;
             }
         }
         catch(Exception $e) {
