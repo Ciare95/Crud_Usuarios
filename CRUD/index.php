@@ -50,7 +50,19 @@ while (true) {
             foreach ($listarUsuarios as $value) {
                 $fecha_nacimiento = new DateTime($value["fecha_nacimiento"]);
                 $edad = $hoy->diff($fecha_nacimiento);
-                echo $value['id'] . " " . $value['primer_nombre'] . " " . $value['segundo_nombre'] . " " . $value["primer_apellido"] . " " . $value['segundo_apellido'] . " " . $edad->y . " años" . " " . $value["telefono"];
+                if ($value['segundo_nombre'] == null) {
+                    $sn = "";
+                } else {
+                    $sn = $value['segundo_nombre'];
+                    $sn .= " ";
+                }
+                if ($value['segundo_apellido'] == null) {
+                    $value['segundo_apellido'] = "";
+                } else {
+                    $sa = $value['segundo_apellido'];
+                    $sa .= " ";
+                }
+                echo $value['id'] . " " . $value['primer_nombre'] . " " . $sn . $value["primer_apellido"] . " " . $sa . $edad->y . " años" . " " . $value["telefono"];
                 echo PHP_EOL;
             }
             break;
