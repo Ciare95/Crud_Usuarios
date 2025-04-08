@@ -45,6 +45,7 @@ while (true) {
             echo "Usuario creado";
             break;
         case '2':
+
             $listarUsuarios = $usuario->listarUsuarios();
 
             foreach ($listarUsuarios as $value) {
