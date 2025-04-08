@@ -22,7 +22,7 @@ while (true) {
     echo PHP_EOL;
     $opcion = readline("ingresa la opcion: ");
     echo PHP_EOL;
-    
+
     switch ($opcion) {
         case '1':
             $pn = readline("Ingresa el primer nombre: ");
@@ -33,7 +33,7 @@ while (true) {
             echo PHP_EOL;
             $sa = readline("Ingresa el segundo apellido: ");
             echo PHP_EOL;
-            $fn = readline("Ingresa su fecha de nacimiento: ");
+            $fn = readline("Ingresa su fecha de nacimiento (YYYY-MM-DD): ");
             echo PHP_EOL;
             $t = readline("Ingresa el telefono: ");
             echo PHP_EOL;
@@ -41,65 +41,86 @@ while (true) {
             echo PHP_EOL;
             $d = readline("Ingresa la direccion: ");
             echo PHP_EOL;
+            if (in_array(null, [$pn, $pa, $fn, $t, $c, $d])) {
+                echo "vuelva a intentarlo porque no puede dejar campos vacios";
+                echo PHP_EOL;
+                break;
+            }
             $usuario->crearUsuario($pn, $sn, $pa, $sa, $fn, $t, $c, $d);
             echo "Usuario creado";
             break;
         case '2':
-
+            $hoy = new DateTime();
             $listarUsuarios = $usuario->listarUsuarios();
-
             foreach ($listarUsuarios as $value) {
-                echo $value['primer_nombre'] . " " . $value["segundo_apellido"];
+                $fecha_nacimiento = new DateTime($value["fecha_nacimiento"]);
+                $edad = $hoy->diff($fecha_nacimiento);
+                if ($value['segundo_nombre'] == null) {
+                    $sn = "";
+                } else {
+                    $sn = $value['segundo_nombre'];
+                    $sn .= " ";
+                }
+                if ($value['segundo_apellido'] == null) {
+                    $value['segundo_apellido'] = "";
+                } else {
+                    $sa = $value['segundo_apellido'];
+                    $sa .= " ";
+                }
+                echo $value['id'] . " " . $value['primer_nombre'] . " " . $sn . $value["primer_apellido"] . " " . $sa . $edad->y . " años" . " " . $value["telefono"];
                 echo PHP_EOL;
             }
             break;
-            case '3':
-                $listarUsuarios = $usuario->listarUsuarios();
-            
-                foreach ($listarUsuarios as $value) {
-                    echo $value['id'] . " " . $value['primer_nombre'] . " " . $value["segundo_apellido"];
-                    echo PHP_EOL;
-                }
+        case '3':
+            $listarUsuarios = $usuario->listarUsuarios();
+
+            foreach ($listarUsuarios as $value) {
+                echo $value['id'] . " " . $value['primer_nombre'] . " " . $value["primer_apellido"];
                 echo PHP_EOL;
-            
-                $id_actualizar = readline("Ingresa el id del usuario para actualizar: ");
-                $primer_nombre = readline("Nuevo primer nombre: ");
-                $segundo_nombre = readline("Nuevo segundo nombre: ");
-                $primer_apellido = readline("Nuevo primer apellido: ");
-                $segundo_apellido = readline("Nuevo segundo apellido: ");
-                $fecha_nacimiento = readline("Nueva fecha de nacimiento (YYYY-MM-DD): ");
-                $telefono = readline("Nuevo teléfono: ");
-                $correo = readline("Nuevo correo: ");
-                $direccion = readline("Nueva dirección: ");
-            
-                $usuario->actualizarUsuario(
-                    $id_actualizar,
-                    $primer_nombre,
-                    $segundo_nombre,
-                    $primer_apellido,
-                    $segundo_apellido,
-                    $fecha_nacimiento,
-                    $telefono,
-                    $correo,
-                    $direccion
-                );
-                break;
-            
+            }
+            echo PHP_EOL;
+
+            $id_actualizar = readline("Ingresa el id del usuario para actualizar: ");
+            $primer_nombre = readline("Nuevo primer nombre: ");
+            $segundo_nombre = readline("Nuevo segundo nombre: ");
+            $primer_apellido = readline("Nuevo primer apellido: ");
+            $segundo_apellido = readline("Nuevo segundo apellido: ");
+            $fecha_nacimiento = readline("Nueva fecha de nacimiento (YYYY-MM-DD): ");
+            $telefono = readline("Nuevo teléfono: ");
+            $correo = readline("Nuevo correo: ");
+            $direccion = readline("Nueva dirección: ");
+
+            $usuario->actualizarUsuario(
+                $id_actualizar,
+                $primer_nombre,
+                $segundo_nombre,
+                $primer_apellido,
+                $segundo_apellido,
+                $fecha_nacimiento,
+                $telefono,
+                $correo,
+                $direccion
+            );
+            break;
+
 
         case '4':
             $id = readline("Ingresa el id del usuario a eliminar: ");
             echo PHP_EOL;
-            $usuario->eliminarUsuario($id);
-            echo "Usuario eliminado";
+            if ($usuario->eliminarUsuario($id)) {
+                echo "Usuario eliminado";
+            } else {
+                echo "Error al eliminar el usuario";
+            }
             break;
 
         case '5':
             echo "Gracias por usar el sistema de administracion de usuarios";
             break 2;
-            
-        
+
+
         default:
             echo "Opcion invalida vuelve a intentarlo";
-    }       break;
+            echo PHP_EOL;
+    }
 }
-
