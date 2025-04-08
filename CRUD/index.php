@@ -46,8 +46,14 @@ while (true) {
                 echo PHP_EOL;
                 break;
             }
+            if ($usuario->validacion_fecha($fn) === false){
+                echo "Formato de fecha incorrecto, vuelva a intentarlo";
+                echo PHP_EOL;
+                break;
+            };
             $usuario->crearUsuario($pn, $sn, $pa, $sa, $fn, $t, $c, $d);
             echo "Usuario creado";
+            echo PHP_EOL;
             break;
         case '2':
             $hoy = new DateTime();

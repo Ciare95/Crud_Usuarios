@@ -1,5 +1,7 @@
 <?php
 
+use function PHPSTORM_META\type;
+
 require_once 'database.php';
 
 class Usuario
@@ -115,6 +117,30 @@ class Usuario
             $stmt->execute();
         } catch (PDOException $e) {
             echo $sql . "<br>" . $e->getMessage();
+        }
+    }
+
+    public function validacion_fecha($fecha){
+        try {
+            if (preg_match('/^\d{4}-\d{2}-\d{2}$/', $fecha)) {
+         
+                $partes = explode('-', $fecha);
+                $anio = (int)$partes[0];
+                $mes = (int)$partes[1];
+                $dia = (int)$partes[2];
+               
+                if (checkdate($mes, $dia, $anio)) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                echo "Formato de fecha incorrecto. Usa YYYY-MM-DD.";
+                echo PHP_EOL;
+            }
+        }
+        catch(Exception $e) {
+            echo 'Error: ' . $e->getMessage();
         }
     }
 }
