@@ -33,7 +33,11 @@ while (true) {
             echo PHP_EOL;
             $sa = readline("Ingresa el segundo apellido: ");
             echo PHP_EOL;
-            $fn = readline("Ingresa su fecha de nacimiento (YYYY-MM-DD): ");
+            $a = readline("Ingresa su año de nacimiento: ");
+            echo PHP_EOL;
+            $m = readline("Ingresa el numero de mes de nacimiento: ");
+            echo PHP_EOL;
+            $dia = readline("Ingresa el dia de nacimiento: ");
             echo PHP_EOL;
             $t = readline("Ingresa el telefono: ");
             echo PHP_EOL;
@@ -41,16 +45,18 @@ while (true) {
             echo PHP_EOL;
             $d = readline("Ingresa la direccion: ");
             echo PHP_EOL;
-            if (in_array(null, [$pn, $pa, $fn, $t, $c, $d])) {
+            if (in_array(null, [$pn, $pa, $a, $m, $dia, $t, $c, $d])) {
                 echo "vuelva a intentarlo porque no puede dejar campos vacios";
                 echo PHP_EOL;
                 break;
             }
-            if ($usuario->validacion_fecha($fn) === false){
+            if ($usuario->validacion_fecha((int)$a, (int)$m, (int)$dia) === false){
                 echo "Formato de fecha incorrecto, vuelva a intentarlo";
                 echo PHP_EOL;
                 break;
             };
+            $fn = "$a-$m-";
+
             $usuario->crearUsuario($pn, $sn, $pa, $sa, $fn, $t, $c, $d);
             echo "Usuario creado";
             echo PHP_EOL;
@@ -115,9 +121,11 @@ while (true) {
             $id = readline("Ingresa el id del usuario a eliminar: ");
             echo PHP_EOL;
             if ($usuario->eliminarUsuario($id)) {
-                echo "Usuario eliminado";
+                echo " Usuario eliminado ";   
+                echo PHP_EOL;            
             } else {
-                echo "Error al eliminar el usuario";
+                echo " Error al eliminar el usuario ";
+                echo PHP_EOL;
             }
             break;
 
