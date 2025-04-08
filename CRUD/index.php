@@ -52,7 +52,7 @@ while (true) {
         case '2':
             $hoy = new DateTime();
             $listarUsuarios = $usuario->listarUsuarios();
-            foreach ($listarUsuarios as $value) {
+            foreach ($listarUsuarios as $key => $value) {
                 $fecha_nacimiento = new DateTime($value["fecha_nacimiento"]);
                 $edad = $hoy->diff($fecha_nacimiento);
                 if ($value['segundo_nombre'] == null) {
@@ -67,9 +67,10 @@ while (true) {
                     $sa = $value['segundo_apellido'];
                     $sa .= " ";
                 }
-                echo $value['id'] . " " . $value['primer_nombre'] . " " . $sn . $value["primer_apellido"] . " " . $sa . $edad->y . " años" . " " . $value["telefono"];
+                echo "ID: " . $value['id'] . PHP_EOL . "Primer nombre: " . $value['primer_nombre'] . PHP_EOL . "Segundo nombre: " . $sn . PHP_EOL . "Primer apellido: " . $value["primer_apellido"] . PHP_EOL . "Segundo apellido: " . $sa . PHP_EOL . "Edad: " . $edad->y . " años" . PHP_EOL . "Teléfono: " . $value["telefono"];
                 echo PHP_EOL;
             }
+            echo PHP_EOL;
             break;
         case '3':
             $listarUsuarios = $usuario->listarUsuarios();
