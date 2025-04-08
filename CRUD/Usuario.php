@@ -75,7 +75,7 @@ class Usuario
     {
         // Lógica para eliminar un usuario
         try {
-            if (obtenerUsuario($id) == null) {
+            if ($this->obtenerUsuario($id) == null) {
                 echo "El usuario no existe";
                 return;
             }
