@@ -55,7 +55,7 @@ while (true) {
                 echo PHP_EOL;
                 break;
             };
-            $fn = "$a-$m-";
+            $fn = "$a-$m-$dia";
 
             $usuario->crearUsuario($pn, $sn, $pa, $sa, $fn, $t, $c, $d);
             echo "Usuario creado";
