@@ -33,7 +33,7 @@ while (true) {
             echo PHP_EOL;
             $sa = readline("Ingresa el segundo apellido: ");
             echo PHP_EOL;
-            $fn = readline("Ingresa su fecha de nacimiento: ");
+            $fn = readline("Ingresa su fecha de nacimiento (YYYY-MM-DD): ");
             echo PHP_EOL;
             $t = readline("Ingresa el telefono: ");
             echo PHP_EOL;
@@ -41,6 +41,11 @@ while (true) {
             echo PHP_EOL;
             $d = readline("Ingresa la direccion: ");
             echo PHP_EOL;
+            if (in_array(null, [$pn, $pa, $fn, $t, $c, $d])) {
+                echo "vuelva a intentarlo porque no puede dejar campos vacios";
+                echo PHP_EOL;
+                break;
+            }
             $usuario->crearUsuario($pn, $sn, $pa, $sa, $fn, $t, $c, $d);
             echo "Usuario creado";
             break;
