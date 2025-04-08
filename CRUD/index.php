@@ -45,12 +45,11 @@ while (true) {
             echo "Usuario creado";
             break;
         case '2':
-            $variable = $usuario->listarUsuarios();
-            foreach ($variable as $var) {
-                foreach ($var as $key => $value) {
-                    echo $value;
-                    echo PHP_EOL;
-                }
+            $listarUsuarios = $usuario->listarUsuarios();
+
+            foreach ($listarUsuarios as $value) {
+                echo $value['primer_nombre'] . " " . $value["segundo_apellido"];
+                echo PHP_EOL;
             }
             break;
         case '3':
