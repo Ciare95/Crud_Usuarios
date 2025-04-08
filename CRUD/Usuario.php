@@ -16,7 +16,7 @@ class Usuario
         try {
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-            $sql = $this->conn->prepare("SELECT primer_nombre, segundo_nombre, primer_apellido, segundo_apellido, fecha_nacimiento, telefono, correo, direccion FROM usuarios");
+            $sql = $this->conn->prepare("SELECT id, primer_nombre, segundo_nombre, primer_apellido, segundo_apellido, fecha_nacimiento, telefono, correo, direccion FROM usuarios");
 
             $sql->execute();
             return $sql->fetchAll(PDO::FETCH_ASSOC);
@@ -68,10 +68,38 @@ class Usuario
         }
     }
 
-    public function actualizarUsuario()
+    public function actualizarUsuario($id, $primer_nombre, $segundo_nombre, $primer_apellido, $segundo_apellido, $fecha_nacimiento, $telefono, $correo, $direccion)
     {
-        // Lógica para actualizar un usuario
+        try {
+            $sql = "UPDATE usuarios SET 
+                        primer_nombre = :primer_nombre, 
+                        segundo_nombre = :segundo_nombre, 
+                        primer_apellido = :primer_apellido, 
+                        segundo_apellido = :segundo_apellido, 
+                        fecha_nacimiento = :fecha_nacimiento, 
+                        telefono = :telefono, 
+                        correo = :correo, 
+                        direccion = :direccion 
+                    WHERE id = :id";
+    
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':id', $id);
+            $stmt->bindParam(':primer_nombre', $primer_nombre);
+            $stmt->bindParam(':segundo_nombre', $segundo_nombre);
+            $stmt->bindParam(':primer_apellido', $primer_apellido);
+            $stmt->bindParam(':segundo_apellido', $segundo_apellido);
+            $stmt->bindParam(':fecha_nacimiento', $fecha_nacimiento);
+            $stmt->bindParam(':telefono', $telefono);
+            $stmt->bindParam(':correo', $correo);
+            $stmt->bindParam(':direccion', $direccion);
+            $stmt->execute();
+    
+            echo "Usuario actualizado correctamente." . PHP_EOL;
+        } catch (PDOException $e) {
+            echo "Error al actualizar usuario: " . $e->getMessage();
+        }
     }
+    
 
     public function eliminarUsuario($id)
     {

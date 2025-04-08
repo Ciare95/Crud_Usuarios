@@ -53,9 +53,38 @@ while (true) {
                 echo PHP_EOL;
             }
             break;
-        case '3':
-            echo "Actualizar usuario";
-            break;
+            case '3':
+                $listarUsuarios = $usuario->listarUsuarios();
+            
+                foreach ($listarUsuarios as $value) {
+                    echo $value['id'] . " " . $value['primer_nombre'] . " " . $value["segundo_apellido"];
+                    echo PHP_EOL;
+                }
+                echo PHP_EOL;
+            
+                $id_actualizar = readline("Ingresa el id del usuario para actualizar: ");
+                $primer_nombre = readline("Nuevo primer nombre: ");
+                $segundo_nombre = readline("Nuevo segundo nombre: ");
+                $primer_apellido = readline("Nuevo primer apellido: ");
+                $segundo_apellido = readline("Nuevo segundo apellido: ");
+                $fecha_nacimiento = readline("Nueva fecha de nacimiento (YYYY-MM-DD): ");
+                $telefono = readline("Nuevo teléfono: ");
+                $correo = readline("Nuevo correo: ");
+                $direccion = readline("Nueva dirección: ");
+            
+                $usuario->actualizarUsuario(
+                    $id_actualizar,
+                    $primer_nombre,
+                    $segundo_nombre,
+                    $primer_apellido,
+                    $segundo_apellido,
+                    $fecha_nacimiento,
+                    $telefono,
+                    $correo,
+                    $direccion
+                );
+                break;
+            
 
         case '4':
             $id = readline("Ingresa el id del usuario a eliminar: ");
