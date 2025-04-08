@@ -15,19 +15,30 @@ class Usuario
     {
         try {
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $sql = $this->conn->prepare("SELECT primer_nombre as 'Primer Nombre', segundo_nombre as 'Segundo Nombre', primer_apellido as 'Primer Apellido', segundo_apellido as 'Segundo Apellido', fecha_nacimiento as 'Fecha de nacimiento', telefono as Teléfono, correo as 'Correo electrónico', direccion as Dirección FROM usuarios");
+
+            $sql = $this->conn->prepare("SELECT primer_nombre, segundo_nombre, primer_apellido, segundo_apellido, fecha_nacimiento, telefono, correo, direccion FROM usuarios");
+
             $sql->execute();
             return $sql->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
             echo "Error al listar usuarios: " . $e->getMessage();
             return [];
         }
-
     }
 
     public function obtenerUsuario($id)
     {
         // Lógica para obtener un usuario por ID
+        try {
+            $sql = "SELECT * FROM usuarios WHERE id=:id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Error al obtener usuario: " . $e->getMessage();
+            return null;
+        }
     }
 
     public function crearUsuario($primer_nombre, $segundo_nombre, $primer_apellido, $segundo_apellido, $fecha_nacimiento, $telefono, $correo, $direccion)
@@ -39,9 +50,9 @@ class Usuario
                                         fecha_nacimiento, telefono, 
                                         correo, direccion) 
                                 VALUES (:primer_nombre, :segundo_nombre, 
-                                :primer_apellido, :segundo_apellido, 
-                                :fecha_nacimiento, :telefono, 
-                                :correo, :direccion)";
+                                        :primer_apellido, :segundo_apellido, 
+                                        :fecha_nacimiento, :telefono, 
+                                        :correo, :direccion)";
             $stmt = $this->conn->prepare($sql);
             $stmt->bindParam(':primer_nombre', $primer_nombre);
             $stmt->bindParam(':segundo_nombre', $segundo_nombre);
@@ -52,10 +63,9 @@ class Usuario
             $stmt->bindParam(':correo', $correo);
             $stmt->bindParam(':direccion', $direccion);
             $stmt->execute();
-        } catch(PDOException $e) {
+        } catch (PDOException $e) {
             echo $sql . PHP_EOL . $e->getMessage();
         }
-        
     }
 
     public function actualizarUsuario()
@@ -66,5 +76,17 @@ class Usuario
     public function eliminarUsuario($id)
     {
         // Lógica para eliminar un usuario
+        try {
+            if (obtenerUsuario($id) == null) {
+                echo "El usuario no existe";
+                return;
+            }
+            $sql = "DELETE FROM usuarios WHERE id=:id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
+        } catch (PDOException $e) {
+            echo $sql . "<br>" . $e->getMessage();
+        }
     }
 }
